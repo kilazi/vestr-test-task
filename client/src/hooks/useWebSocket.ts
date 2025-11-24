@@ -19,7 +19,7 @@ export function useWebSocket() {
   const [marketData, setMarketData] = useState<MarketData[]>([]);
   const [connected, setConnected] = useState(false);
   const wsRef = useRef<WebSocket | null>(null);
-  const reconnectTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const reconnectTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     function connect() {

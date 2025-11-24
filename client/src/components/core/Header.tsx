@@ -13,8 +13,8 @@ const Header: React.FC = () => {
         <div className="header">
           <div className="header-logo">
             <div>
-              <b className="header-logo-text">VESTR</b>
-              <i className="header-logo-subtitle">Financial education and <br />simulated investing</i>
+              <b className="header-logo-text">TEST-TASK</b>
+              <i className="header-logo-subtitle">github.com/kilazi/vestr-test-task <br />Done in an hour</i>
             </div>
           </div>
 
