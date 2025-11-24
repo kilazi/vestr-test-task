@@ -1,0 +1,25 @@
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  color: #ffffff;
+}
+
+.checkbox-input {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+  accent-color: #00ff00;
+}
+
+.checkbox-text {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.checkbox-label:hover .checkbox-text {
+  color: #00ff00;
+}
+

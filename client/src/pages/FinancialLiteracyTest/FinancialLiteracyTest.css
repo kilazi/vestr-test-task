@@ -1,0 +1,94 @@
+.financial-literacy-test-page {
+  min-height: 100vh;
+  background-color: #0a0a0a;
+  color: #ffffff;
+}
+
+.test-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.test-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.back-button {
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+  align-self: flex-start;
+  transition: color 0.2s;
+}
+
+.back-button:hover {
+  color: #00ff00;
+}
+
+.test-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 2rem;
+}
+
+.scoring-info {
+  background-color: #1a1a1a;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.scoring-info p {
+  color: #cccccc;
+  font-size: 0.9375rem;
+  margin-bottom: 1.5rem;
+}
+
+.scoring-info strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.scoring-tiers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.tier {
+  color: #cccccc;
+  font-size: 0.9375rem;
+}
+
+.tier strong {
+  color: #ffffff;
+  margin-right: 0.5rem;
+}
+
+.test-status-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.questions-section {
+  margin-bottom: 2rem;
+}
+
+.test-footer {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
