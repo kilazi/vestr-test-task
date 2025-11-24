@@ -103,7 +103,9 @@ const FinancialLiteracyTest: React.FC = () => {
 
           <div className="test-status-section">
             <Status status="In Progress" />
-            <Timer startTime={0} onTimeUpdate={handleTimeUpdate} />
+            <div className="timer-sticky-wrapper">
+              <Timer startTime={0} onTimeUpdate={handleTimeUpdate} />
+            </div>
           </div>
 
           {loading ? (

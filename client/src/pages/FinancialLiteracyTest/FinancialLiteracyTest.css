@@ -59,8 +59,8 @@
 
 .scoring-tiers {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
+  flex-direction: column;
+  gap: 0.5rem;
   margin-top: 1rem;
 }
 
@@ -76,10 +76,19 @@
 
 .test-status-section {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: flex-start;
   gap: 0.5rem;
   margin-bottom: 2rem;
+  position: relative;
+}
+
+.timer-sticky-wrapper {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  z-index: 10;
 }
 
 .questions-section {

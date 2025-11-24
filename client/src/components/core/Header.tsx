@@ -9,20 +9,22 @@ const Header: React.FC = () => {
   return (
     <>
       <TopBar />
-      <div className="header">
-        <div className="header-logo">
-          <div>
-            <b className="header-logo-text">VESTR</b>
-            <i className="header-logo-subtitle">Financial education and <br />simulated investing</i>
+      <div className="header-wrapper">
+        <div className="header">
+          <div className="header-logo">
+            <div>
+              <b className="header-logo-text">VESTR</b>
+              <i className="header-logo-subtitle">Financial education and <br />simulated investing</i>
+            </div>
           </div>
-        </div>
 
-        <div className="header-center">
-          <Search />
-          <Menu />
-        </div>
+          <div className="header-center">
+            <Search />
+            <Menu />
+          </div>
 
-        <Social />
+          <Social />
+        </div>
       </div>
     </>
   );

@@ -39,3 +39,8 @@
   position: absolute;
   width: 100%;
 }
+
+.menu-link--disabled {
+  opacity: 0.5;
+  cursor: not-allowed !important;
+}
