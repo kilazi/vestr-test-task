@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 import { createServer } from 'http';
 import { WebSocketServer, WebSocket } from 'ws';
+import path from 'path';
 import { getQuizQuestions, calculateScore } from './utils/quiz';
 import { QuizCheckRequest } from './types/quiz';
 import { fetchMarketData } from './services/binance';
@@ -50,6 +51,21 @@ app.post('/api/quiz/check', (req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to check quiz' });
   }
 });
+
+// Serve static files from client build in production
+if (process.env.NODE_ENV === 'production') {
+  const clientDistPath = path.join(__dirname, '../../client/dist');
+  app.use(express.static(clientDistPath));
+  
+  // Catch-all handler: send back React's index.html file for client-side routing
+  app.get('*', (req: Request, res: Response) => {
+    // Don't serve index.html for API routes
+    if (req.path.startsWith('/api') || req.path.startsWith('/ws')) {
+      return res.status(404).json({ error: 'Not found' });
+    }
+    res.sendFile(path.join(clientDistPath, 'index.html'));
+  });
+}
 
 // WebSocket server setup
 const wss = new WebSocketServer({ server, path: '/ws' });

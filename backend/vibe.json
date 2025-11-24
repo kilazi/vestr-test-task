@@ -53,6 +53,281 @@
       "A market open only during bear season"
     ],
     "correctAnswer": 1
+  },
+  {
+    "id": 6,
+    "questionText": "What is compound interest?",
+    "options": [
+      "Interest calculated only on the principal amount",
+      "Interest calculated on both the principal and previously earned interest",
+      "A type of loan interest",
+      "Interest that compounds daily"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 7,
+    "questionText": "What is the difference between a stock and a bond?",
+    "options": [
+      "Stocks represent ownership, bonds represent debt",
+      "Bonds represent ownership, stocks represent debt",
+      "There is no difference",
+      "Stocks are riskier than bonds, but bonds pay more"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 8,
+    "questionText": "What does 'bull market' refer to?",
+    "options": [
+      "A market where prices are falling",
+      "A market where prices are rising or expected to rise",
+      "A market that trades cattle futures",
+      "A market that only operates in the morning"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 9,
+    "questionText": "What is an ETF (Exchange-Traded Fund)?",
+    "options": [
+      "A single stock",
+      "A collection of stocks or bonds that trades like a stock",
+      "A type of savings account",
+      "A government bond"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 10,
+    "questionText": "What is the 'Rule of 72' used for?",
+    "options": [
+      "Calculating stock prices",
+      "Estimating how long it takes for an investment to double",
+      "Determining bond yields",
+      "Calculating tax rates"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 11,
+    "questionText": "What is a 401(k) plan?",
+    "options": [
+      "A type of savings account",
+      "A retirement savings plan sponsored by an employer",
+      "A type of insurance policy",
+      "A government assistance program"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 12,
+    "questionText": "What does 'liquidity' mean in finance?",
+    "options": [
+      "How much water a company uses",
+      "How easily an asset can be converted to cash",
+      "The amount of debt a company has",
+      "The profit margin of a company"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 13,
+    "questionText": "What is inflation?",
+    "options": [
+      "When prices decrease over time",
+      "When the general price level of goods and services increases over time",
+      "When the stock market crashes",
+      "When interest rates go up"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 14,
+    "questionText": "What is a mutual fund?",
+    "options": [
+      "A single stock investment",
+      "A pool of money from many investors used to buy a diversified portfolio",
+      "A type of bank account",
+      "A government bond"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 15,
+    "questionText": "What does 'P/E ratio' stand for and what does it measure?",
+    "options": [
+      "Price/Earnings ratio - measures how expensive a stock is relative to its earnings",
+      "Profit/Expense ratio - measures company profitability",
+      "Purchase/Equity ratio - measures stock ownership",
+      "Principal/Equity ratio - measures debt levels"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 16,
+    "questionText": "What is dollar-cost averaging?",
+    "options": [
+      "Investing a fixed amount regularly regardless of price",
+      "Buying stocks only when prices are low",
+      "Selling stocks when prices are high",
+      "Investing all money at once"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 17,
+    "questionText": "What is a market cap (market capitalization)?",
+    "options": [
+      "The total value of all a company's outstanding shares",
+      "The price of a single share",
+      "The company's annual revenue",
+      "The company's total debt"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 18,
+    "questionText": "What is the difference between a Roth IRA and a Traditional IRA?",
+    "options": [
+      "Roth IRA contributions are tax-deductible, Traditional IRA withdrawals are tax-free",
+      "Roth IRA contributions are taxed now, withdrawals are tax-free; Traditional IRA contributions are tax-deductible, withdrawals are taxed",
+      "There is no difference",
+      "Roth IRA is for stocks, Traditional IRA is for bonds"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 19,
+    "questionText": "What is a stop-loss order?",
+    "options": [
+      "An order to buy a stock at a specific price",
+      "An order to sell a stock if it falls to a specific price",
+      "An order to hold a stock indefinitely",
+      "An order to transfer stocks between accounts"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 20,
+    "questionText": "What is the S&P 500?",
+    "options": [
+      "A single company's stock",
+      "A stock market index tracking 500 large U.S. companies",
+      "A type of bond",
+      "A government agency"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 21,
+    "questionText": "What does 'blue chip' stock mean?",
+    "options": [
+      "A stock that pays high dividends",
+      "A large, well-established, financially stable company",
+      "A new startup company",
+      "A stock that trades for less than $1"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 22,
+    "questionText": "What is short selling?",
+    "options": [
+      "Selling a stock you own",
+      "Borrowing and selling a stock with the hope of buying it back cheaper",
+      "Selling stocks quickly",
+      "Selling stocks at a loss"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 23,
+    "questionText": "What is an index fund?",
+    "options": [
+      "A fund that tries to beat the market",
+      "A fund that tracks a specific market index",
+      "A fund that invests in only one company",
+      "A fund that only invests in bonds"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 24,
+    "questionText": "What is a margin account?",
+    "options": [
+      "A regular brokerage account",
+      "An account that allows borrowing money to buy securities",
+      "A savings account with high interest",
+      "A retirement account"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 25,
+    "questionText": "What is the difference between active and passive investing?",
+    "options": [
+      "Active investing tries to beat the market, passive investing tracks market indexes",
+      "Passive investing tries to beat the market, active investing tracks indexes",
+      "There is no difference",
+      "Active investing is riskier, passive is safer"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 26,
+    "questionText": "What is a dividend yield?",
+    "options": [
+      "The total amount of dividends paid",
+      "The annual dividend payment divided by the stock price, expressed as a percentage",
+      "The number of times dividends are paid per year",
+      "The growth rate of dividends"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 27,
+    "questionText": "What is asset allocation?",
+    "options": [
+      "How much money you have",
+      "How you divide investments among different asset categories",
+      "The total value of your portfolio",
+      "The number of stocks you own"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 28,
+    "questionText": "What is a stock split?",
+    "options": [
+      "When a company divides existing shares into multiple shares",
+      "When a company goes bankrupt",
+      "When two companies merge",
+      "When a stock price doubles"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 29,
+    "questionText": "What is the difference between a growth stock and a value stock?",
+    "options": [
+      "Growth stocks are expected to grow faster, value stocks are undervalued relative to fundamentals",
+      "Value stocks grow faster, growth stocks are undervalued",
+      "There is no difference",
+      "Growth stocks pay dividends, value stocks don't"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 30,
+    "questionText": "What is rebalancing a portfolio?",
+    "options": [
+      "Buying more of the same stocks",
+      "Adjusting asset allocation back to target percentages",
+      "Selling all stocks",
+      "Moving money to a savings account"
+    ],
+    "correctAnswer": 1
   }
 ]
 
