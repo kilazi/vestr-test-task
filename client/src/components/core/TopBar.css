@@ -3,18 +3,32 @@
   color: #ffffff;
   padding: 0.5rem 0;
   font-size: 0.875rem;
-  overflow-x: auto;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
 }
 
 .top-bar-content {
-  display: flex;
+  display: inline-flex;
   gap: 1.5rem;
   padding: 0 2rem;
   white-space: nowrap;
+  animation: scroll-left 180s linear infinite;
+  will-change: transform;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .market-index {
   display: inline-block;
+  flex-shrink: 0;
 }
 
 .positive {

@@ -15,3 +15,13 @@ Build both frontend and backend for production.
 
 ### `npm start`
 Run the compiled backend server.
+
+## Data Files
+
+### `backend/vibe.json`
+Contains the quiz questions data for the financial literacy test. This JSON file includes 30 questions with their:
+- Question text
+- Multiple choice options
+- Correct answer index
+
+The backend loads this file at runtime to serve quiz questions and validate answers. The file is cached in memory after the first read for improved performance.

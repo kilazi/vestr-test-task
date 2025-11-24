@@ -1,9 +1,14 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
+import { createServer } from 'http';
+import { WebSocketServer, WebSocket } from 'ws';
 import { getQuizQuestions, calculateScore } from './utils/quiz';
 import { QuizCheckRequest } from './types/quiz';
+import { fetchMarketData } from './services/binance';
+import { MarketData } from './types/market';
 
 const app = express();
+const server = createServer(app);
 const PORT = process.env.PORT || 3001;
 
 // Middleware
@@ -46,8 +51,91 @@ app.post('/api/quiz/check', (req: Request, res: Response) => {
   }
 });
 
+// WebSocket server setup
+const wss = new WebSocketServer({ server, path: '/ws' });
+
+const clients = new Set<WebSocket>();
+
+wss.on('connection', (ws: WebSocket) => {
+  console.log('New WebSocket client connected');
+  clients.add(ws);
+
+  ws.on('close', () => {
+    console.log('WebSocket client disconnected');
+    clients.delete(ws);
+  });
+
+  ws.on('error', (error) => {
+    console.error('WebSocket error:', error);
+  });
+
+  // Send initial market data when client connects
+  fetchMarketData()
+    .then((data) => {
+      ws.send(JSON.stringify({ type: 'marketData', data }));
+    })
+    .catch((error) => {
+      console.error('Error sending initial market data:', error);
+    });
+});
+
+// Poll Binance API every 10 seconds and broadcast to all clients
+let pollingInterval: NodeJS.Timeout | null = null;
+
+function startPolling() {
+  if (pollingInterval) {
+    clearInterval(pollingInterval);
+  }
+
+  pollingInterval = setInterval(async () => {
+    try {
+      const marketData = await fetchMarketData();
+      
+      // Only broadcast if we have data
+      if (marketData.length > 0) {
+        // Broadcast to all connected clients
+        const message = JSON.stringify({ type: 'marketData', data: marketData });
+        clients.forEach((client) => {
+          if (client.readyState === WebSocket.OPEN) {
+            client.send(message);
+          }
+        });
+      }
+    } catch (error) {
+      console.error('Error polling market data:', error);
+      // Try to send cached data if available
+      const cachedData = await fetchMarketData().catch(() => null);
+      if (cachedData && cachedData.length > 0) {
+        const message = JSON.stringify({ type: 'marketData', data: cachedData });
+        clients.forEach((client) => {
+          if (client.readyState === WebSocket.OPEN) {
+            client.send(message);
+          }
+        });
+      }
+    }
+  }, 10000); // 10 seconds - increased to reduce rate limiting
+
+  // Fetch immediately on startup
+  fetchMarketData()
+    .then((data) => {
+      const message = JSON.stringify({ type: 'marketData', data });
+      clients.forEach((client) => {
+        if (client.readyState === WebSocket.OPEN) {
+          client.send(message);
+        }
+      });
+    })
+    .catch((error) => {
+      console.error('Error fetching initial market data:', error);
+    });
+}
+
+startPolling();
+
 // Start server
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`WebSocket server is running on ws://localhost:${PORT}/ws`);
 });
 

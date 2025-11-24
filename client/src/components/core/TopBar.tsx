@@ -1,19 +1,44 @@
 import React from 'react';
+import { useWebSocket } from '../../hooks/useWebSocket';
 import './TopBar.css';
 
 const TopBar: React.FC = () => {
+  const { marketData, connected } = useWebSocket();
+
+  const formatPrice = (price: string): string => {
+    const num = parseFloat(price);
+    if (num >= 1000) {
+      return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+    return num.toFixed(2);
+  };
+
+  const formatChangePercent = (percent: number): string => {
+    return Math.abs(percent).toFixed(2);
+  };
+
+  // Duplicate the data for seamless scrolling
+  const duplicatedData = connected && marketData.length > 0 
+    ? [...marketData, ...marketData] 
+    : [];
+
   return (
     <div className="top-bar">
       <div className="top-bar-content">
-        <span className="market-index">DJI $30,120.34 <span className="positive">▲ 2.32%</span></span>
-        <span className="market-index">SPX $5,301.65 <span className="positive">▲ 5.31%</span></span>
-        <span className="market-index">IXIC $16,723.65 <span className="positive">▲ 1.00%</span></span>
-        <span className="market-index">RUT $2,108.05 <span className="positive">▲ 1.00%</span></span>
-        <span className="market-index">BTC $66,163.65 <span className="positive">▲ 11.29%</span></span>
-        <span className="market-index">VIX 12.65 <span className="negative">▼ 4.00%</span></span>
-        <span className="market-index">GOOG $66,163.65 <span className="positive">▲ 11.29%</span></span>
-        <span className="market-index">TSLA $66,163.65 <span className="positive">▲ 11.29%</span></span>
-        <span className="market-index">AAPL $66,163.65 <span className="positive">▲ 11.29%</span></span>
+        {connected && marketData.length > 0 ? (
+          duplicatedData.map((data, index) => (
+            <span key={`${data.symbol}-${index}`} className="market-index">
+              {data.symbol} ${formatPrice(data.price)}{' '}
+              {data.changePercent >= 0 ? (
+                <span className="positive">▲ {formatChangePercent(data.changePercent)}%</span>
+              ) : (
+                <span className="negative">▼ {formatChangePercent(data.changePercent)}%</span>
+              )}
+            </span>
+          ))
+        ) : (
+          <span className="market-index">Connecting to market data...</span>
+        )}
       </div>
     </div>
   );
