@@ -44,3 +44,26 @@
   opacity: 0.5;
   cursor: not-allowed !important;
 }
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .menu-nav {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 12px 10px 0;
+    gap: 0.5rem;
+  }
+
+  .menu-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .menu-link {
+    font-size: 10px !important;
+    padding-bottom: 12px !important;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}

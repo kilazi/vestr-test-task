@@ -25,3 +25,26 @@
   gap: 0.75rem;
 }
 
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .question-container {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+  }
+
+  .question-title {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .question-text {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+
+  .question-answers {
+    gap: 0.5rem;
+  }
+}
+

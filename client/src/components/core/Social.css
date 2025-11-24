@@ -47,3 +47,39 @@
 .social-icon-button .social-icon-image {
   width: 16px !important;
 }
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .social {
+    width: 100%;
+  }
+
+  .social-profile {
+    justify-content: flex-start;
+    margin-bottom: 0.5rem;
+  }
+
+  .social-profile-button {
+    font-size: 10px;
+    height: 24px;
+    width: 90px;
+  }
+
+  .social-icons {
+    justify-content: flex-start;
+    padding-bottom: 5px;
+    padding-top: 5px;
+  }
+
+  .social-icon-button {
+    padding: 5px 6px;
+  }
+
+  .social-icon-image {
+    width: 14px;
+  }
+
+  .social-icon-button .social-icon-image {
+    width: 14px !important;
+  }
+}

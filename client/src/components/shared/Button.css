@@ -33,3 +33,12 @@
   cursor: not-allowed;
 }
 
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .button {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9375rem;
+    min-height: 44px; /* Better touch target */
+  }
+}
+

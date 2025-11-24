@@ -25,3 +25,16 @@
   margin: 0;
 }
 
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .search-container {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .search-input {
+    padding: 6px 12px;
+    font-size: 0.875rem;
+  }
+}
+
