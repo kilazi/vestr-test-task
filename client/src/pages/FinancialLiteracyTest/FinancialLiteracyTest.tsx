@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TopBar from '../../components/core/TopBar';
 import Header from '../../components/core/Header';
 import Menu from '../../components/core/Menu';
@@ -8,26 +8,68 @@ import Timer from '../../components/shared/Timer';
 import Button from '../../components/shared/Button';
 import Question from './Question';
 import Answer from './Answer';
+import { QuizQuestion, QuizCheckRequest, QuizCheckResponse } from '../../types/quiz';
 import './FinancialLiteracyTest.css';
 
 const FinancialLiteracyTest: React.FC = () => {
-  const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: string }>({});
+  const [questions, setQuestions] = useState<QuizQuestion[]>([]);
+  const [selectedAnswers, setSelectedAnswers] = useState<{ [questionId: number]: number }>({});
+  const [timeElapsed, setTimeElapsed] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  const [results, setResults] = useState<QuizCheckResponse | null>(null);
 
-  const handleAnswerChange = (questionNumber: number, value: string) => {
+  useEffect(() => {
+    fetchQuestions();
+  }, []);
+
+  const fetchQuestions = async () => {
+    try {
+      const response = await fetch('/api/quiz');
+      const data: QuizQuestion[] = await response.json();
+      setQuestions(data);
+    } catch (error) {
+      console.error('Error fetching questions:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleAnswerChange = (questionId: number, optionIndex: number) => {
     setSelectedAnswers((prev) => ({
       ...prev,
-      [questionNumber]: value,
+      [questionId]: optionIndex,
     }));
   };
 
-  const sampleQuestion = "What was the primary innovation introduced by the Dutch East India Company in the 1600s that laid the groundwork for the modern stock market?";
-  
-  const sampleAnswers = [
-    "Selling rights to profits to foreign people in exchange for local goods",
-    "Paying sailors with shares instead of wages",
-    "Selling ownership shares to private citizens to fund voyages",
-    "Issuing government-backed bonds to finance expeditions"
-  ];
+  const handleFinishTest = async () => {
+    setSubmitting(true);
+    try {
+      const request: QuizCheckRequest = {
+        answers: selectedAnswers,
+        timeElapsed,
+      };
+      
+      const response = await fetch('/api/quiz/check', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(request),
+      });
+      
+      const data: QuizCheckResponse = await response.json();
+      setResults(data);
+    } catch (error) {
+      console.error('Error submitting quiz:', error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleTimeUpdate = (seconds: number) => {
+    setTimeElapsed(seconds);
+  };
 
   return (
     <div className="financial-literacy-test-page">
@@ -69,48 +111,77 @@ const FinancialLiteracyTest: React.FC = () => {
 
           <div className="test-status-section">
             <Status status="In Progress" />
-            <Timer startTime={12} />
+            <Timer startTime={0} onTimeUpdate={handleTimeUpdate} />
           </div>
 
-          <div className="questions-section">
-            <Question 
-              questionNumber={1} 
-              question={sampleQuestion}
-            >
-              {sampleAnswers.map((answer, index) => (
-                <Answer
-                  key={index}
-                  value={`answer-${index}`}
-                  label={answer}
-                  checked={selectedAnswers[1] === `answer-${index}`}
-                  onChange={(value) => handleAnswerChange(1, value)}
-                  name="question-1"
-                />
-              ))}
-            </Question>
+          {loading ? (
+            <div className="loading">Loading questions...</div>
+          ) : results ? (
+            <div className="results-section">
+              <h2>Test Results</h2>
+              <div className="results-summary">
+                <div className="result-item">
+                  <strong>Total Score:</strong> {results.score} points
+                </div>
+                <div className="result-item">
+                  <strong>Accuracy Score:</strong> {results.accuracyScore} points ({results.correctAnswers}/{results.totalQuestions} correct)
+                </div>
+                <div className="result-item">
+                  <strong>Time Bonus:</strong> {results.timeBonus} points
+                </div>
+                <div className="result-item">
+                  <strong>Time Taken:</strong> {Math.floor(timeElapsed / 60)} mins {timeElapsed % 60} seconds
+                </div>
+              </div>
+              <div className="results-details">
+                <h3>Question Results:</h3>
+                {results.results.map((result, index) => (
+                  <div key={result.questionId} className={`result-question ${result.isCorrect ? 'correct' : 'incorrect'}`}>
+                    <strong>Question {index + 1}:</strong> {result.isCorrect ? '✓ Correct' : '✗ Incorrect'}
+                    {!result.isCorrect && (
+                      <div className="correct-answer-info">
+                        Correct answer was option {result.correctAnswer + 1}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <>
+              <div className="questions-section">
+                {questions.map((question) => (
+                  <Question 
+                    key={question.id}
+                    questionNumber={question.id} 
+                    question={question.questionText}
+                  >
+                    {question.options.map((option, index) => (
+                      <Answer
+                        key={index}
+                        value={index.toString()}
+                        label={option}
+                        checked={selectedAnswers[question.id] === index}
+                        onChange={(value) => handleAnswerChange(question.id, parseInt(value))}
+                        name={`question-${question.id}`}
+                      />
+                    ))}
+                  </Question>
+                ))}
+              </div>
 
-            <Question 
-              questionNumber={2} 
-              question={sampleQuestion}
-            >
-              {sampleAnswers.map((answer, index) => (
-                <Answer
-                  key={index}
-                  value={`answer-${index}`}
-                  label={answer}
-                  checked={selectedAnswers[2] === `answer-${index}`}
-                  onChange={(value) => handleAnswerChange(2, value)}
-                  name="question-2"
-                />
-              ))}
-            </Question>
-          </div>
-
-          <div className="test-footer">
-            <Button variant="primary" type="button">
-              Finish Test
-            </Button>
-          </div>
+              <div className="test-footer">
+                <Button 
+                  variant="primary" 
+                  type="button"
+                  onClick={handleFinishTest}
+                  disabled={submitting || Object.keys(selectedAnswers).length === 0}
+                >
+                  {submitting ? 'Submitting...' : 'Finish Test'}
+                </Button>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
