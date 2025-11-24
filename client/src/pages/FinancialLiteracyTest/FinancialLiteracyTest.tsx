@@ -15,6 +15,7 @@ const FinancialLiteracyTest: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [results, setResults] = useState<QuizCheckResponse | null>(null);
+  const [testStarted, setTestStarted] = useState(false);
 
   useEffect(() => {
     fetchQuestions();
@@ -68,6 +69,28 @@ const FinancialLiteracyTest: React.FC = () => {
     setTimeElapsed(seconds);
   };
 
+  const handleStartTest = () => {
+    setTestStarted(true);
+  };
+
+  const getLevel = (score: number): string => {
+    if (score >= 170) return 'Expert';
+    if (score >= 150) return 'Advanced';
+    if (score >= 130) return 'Proficient';
+    if (score >= 115) return 'Passing';
+    return 'Below Passing';
+  };
+
+  const formatTime = (seconds: number): string => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}m ${secs}s (${seconds} seconds)`;
+  };
+
+  const getQuestionById = (questionId: number): QuizQuestion | undefined => {
+    return questions.find(q => q.id === questionId);
+  };
+
   return (
     <div className="financial-literacy-test-page">
       <Header />
@@ -101,48 +124,85 @@ const FinancialLiteracyTest: React.FC = () => {
             </div>
           </div>
 
-          <div className="test-status-section">
-            <Status status="In Progress" />
-            <div className="timer-sticky-wrapper">
-              <Timer startTime={0} onTimeUpdate={handleTimeUpdate} />
-            </div>
-          </div>
-
           {loading ? (
             <div className="loading">Loading questions...</div>
-          ) : results ? (
-            <div className="results-section">
-              <h2>Test Results</h2>
-              <div className="results-summary">
-                <div className="result-item">
-                  <strong>Total Score:</strong> {results.score} points
-                </div>
-                <div className="result-item">
-                  <strong>Accuracy Score:</strong> {results.accuracyScore} points ({results.correctAnswers}/{results.totalQuestions} correct)
-                </div>
-                <div className="result-item">
-                  <strong>Time Bonus:</strong> {results.timeBonus} points
-                </div>
-                <div className="result-item">
-                  <strong>Time Taken:</strong> {Math.floor(timeElapsed / 60)} mins {timeElapsed % 60} seconds
-                </div>
-              </div>
-              <div className="results-details">
-                <h3>Question Results:</h3>
-                {results.results.map((result, index) => (
-                  <div key={result.questionId} className={`result-question ${result.isCorrect ? 'correct' : 'incorrect'}`}>
-                    <strong>Question {index + 1}:</strong> {result.isCorrect ? '✓ Correct' : '✗ Incorrect'}
-                    {!result.isCorrect && (
-                      <div className="correct-answer-info">
-                        Correct answer was option {result.correctAnswer + 1}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
+          ) : !testStarted ? (
+            <div className="test-ready-section">
+              <Button 
+                variant="primary" 
+                type="button"
+                onClick={handleStartTest}
+              >
+                I'm ready!
+              </Button>
             </div>
+          ) : results ? (
+            <>
+              <div className="results-questions-section">
+                {results.results.map((result, index) => {
+                  const question = getQuestionById(result.questionId);
+                  if (!question) return null;
+                  
+                  return (
+                    <div key={result.questionId} className={`result-question-card ${result.isCorrect ? 'correct' : 'incorrect'}`}>
+                      <div className={`result-question-header ${result.isCorrect ? 'correct' : 'incorrect'}`}>
+                        Question {index + 1} {result.isCorrect ? 'Correct' : 'Incorrect'}
+                      </div>
+                      <div className="result-question-text">{question.questionText}</div>
+                      <div className="result-options">
+                        {question.options.map((option, optionIndex) => {
+                          const isCorrect = optionIndex === result.correctAnswer;
+                          const isUserAnswer = optionIndex === result.userAnswer;
+                          const showGreen = isCorrect;
+                          const showRed = !result.isCorrect && isUserAnswer && !isCorrect;
+                          
+                          return (
+                            <div key={optionIndex} className={`result-option ${showGreen ? 'correct-option' : ''} ${showRed ? 'incorrect-option' : ''}`}>
+                              <span className="option-indicator">
+                                {showGreen && <span className="indicator-dot green-dot"></span>}
+                                {showRed && <span className="indicator-dot red-dot"></span>}
+                              </span>
+                              <span className="option-text">{option}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="results-summary-section">
+                <h2 className="results-title">Results</h2>
+                <div className="results-summary">
+                  <div className="result-summary-item">
+                    <span className="result-label">Correct:</span>
+                    <span className="result-value">{results.correctAnswers}/{results.totalQuestions}</span>
+                  </div>
+                  <div className="result-summary-item">
+                    <span className="result-label">Time:</span>
+                    <span className="result-value">{formatTime(timeElapsed)}</span>
+                  </div>
+                  <div className="result-summary-item">
+                    <span className="result-label">Score:</span>
+                    <span className="result-value">{results.score}</span>
+                  </div>
+                  <div className="result-summary-item">
+                    <span className="result-label">Level:</span>
+                    <span className="result-value">{getLevel(results.score)}</span>
+                  </div>
+                </div>
+              </div>
+            </>
           ) : (
             <>
+              <div className="test-status-section">
+                <Status status="In Progress" />
+                <div className="timer-sticky-wrapper">
+                  <Timer startTime={0} onTimeUpdate={handleTimeUpdate} />
+                </div>
+              </div>
+
               <div className="questions-section">
                 {questions.map((question) => (
                   <Question 
