@@ -1,4 +1,49 @@
 .social {
-  /* Styles for social component if needed */
+  width: 27%;
 }
 
+.social-profile {
+  align-items: center;
+  display: flex;
+  justify-content: end;
+}
+
+.social-profile-button {
+  align-items: center;
+  background-color: var(--background-color);
+  border-radius: 100px;
+  color: var(--text-color);
+  cursor: pointer;
+  display: flex;
+  font-size: 11px;
+  font-weight: 500;
+  height: 27.5px;
+  justify-content: center;
+  width: 112px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 8px;
+  justify-content: end;
+  padding-bottom: 7px;
+  padding-top: 7px;
+  width: 100%;
+}
+
+.social-icon-button {
+  background-color: var(--background-color);
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  padding: 7px 8px;
+}
+
+.social-icon-image {
+  width: 18px;
+  vertical-align: middle;
+}
+
+.social-icon-button .social-icon-image {
+  width: 16px !important;
+}

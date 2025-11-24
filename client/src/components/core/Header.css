@@ -1,53 +1,171 @@
+@import url('https://fonts.googleapis.com/css?family=Inter:100,200,300,400,500,600,700,800,900&display=swap');
+
+@font-face {
+  font-family: SF Pro Display Medium;
+  src: url(https://vestr.io/static/media/SF-Pro-Display-Medium.ee76899cb97dd52c04b8.otf) format("opentype");
+}
+
+@font-face {
+  font-family: SF Pro Display Bold;
+  src: url(https://vestr.io/static/media/SF-Pro-Display-Bold.7b1cb8672b06d2969086.otf) format("opentype");
+}
+
+@font-face {
+  font-family: Inter Medium;
+  src: url(https://vestr.io/static/media/Inter-Medium.47d7ae99fb86f824b779.otf) format("opentype");
+}
+
+@font-face {
+  font-family: Inter Bold;
+  src: url(https://vestr.io/static/media/Inter-Bold.b7d445da0ac878e6dc6b.otf) format("opentype");
+}
+
+/* Global styles */
+body {
+  letter-spacing: 0.035rem !important;
+  font-family: Inter Medium, sans-serif;
+  font-weight: 0 !important;
+  background-color: var(--main-color);
+  color: #fff !important;
+  font-size: var(--bs-body-font-size);
+  line-height: var(--bs-body-line-height);
+  text-align: var(--bs-body-text-align);
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  font-family: var(--bs-body-font-family);
+  font-size: var(--bs-body-font-size);
+  font-weight: var(--bs-body-font-weight);
+  line-height: var(--bs-body-line-height);
+  margin: 0;
+  text-align: var(--bs-body-text-align);
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+  --bs-link-color-rgb: var(--bs-link-hover-color-rgb);
+}
+
+* {
+  letter-spacing: 0.035rem !important;
+  font-family: SF Pro Display Medium, sans-serif;
+  font-family: Inter Medium, sans-serif;
+  font-weight: 0 !important;
+}
+
+html {
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: scroll;
+  box-sizing: border-box;
+  position: relative;
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+::-webkit-scrollbar {
+  display: none !important;
+}
+
+:root {
+  --font-med-s: 1.25rem;
+  --font-med-l: 1.4rem;
+  --background-color: #f2f2f2;
+  --text-color: #000;
+  --border-color: #c6c6c6;
+  --main-color: #fff;
+  --main-padding: max(3rem, calc(5% + 12rem));
+  --border: 0.05rem solid var(--border-color);
+  --content-width: clamp(1080px, calc(100vw - var(--main-padding) * 2), 1440px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Header component styles */
 .header {
-  background-color: #1a1a1a;
-  padding: 1rem 2rem;
-  border-bottom: 1px solid #333;
-}
-
-.header-content {
+  align-items: center;
+  background-color: var(--main-color);
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
+  margin: 0 auto;
+  max-width: var(--content-width);
+  overflow: visible;
+  padding: 0 3rem;
+  position: relative;
+  row-gap: 2rem;
 }
 
-.logo-section {
-  display: flex;
-  flex-direction: column;
+.header-logo {
+  width: 27%;
 }
 
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #ffffff;
-  margin-bottom: 0.25rem;
+.header-logo-text {
+  font-family: Inter, sans-serif !important;
+  color: var(--bs-heading-color);
+  display: block;
+  font-size: 30px;
+  font-style: italic;
+  font-weight: 900;
+  color: var(--text-color);
+  font-family: Inter Bold, sans-serif !important;
+  font-weight: bolder;
 }
 
-.tagline {
-  font-size: 0.875rem;
-  color: #cccccc;
+.header-logo-subtitle {
+  color: #707070;
+  font-size: 9px;
+  font-weight: 300;
+  font-family: Inter, sans-serif !important;
 }
 
-.search-container {
-  display: flex;
-  align-items: center;
+.header-center {
+  width: 46%;
 }
 
-.search-input {
-  background-color: #2a2a2a;
-  border: 1px solid #444;
-  color: #ffffff;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  font-size: 0.875rem;
-  min-width: 200px;
+/* Global link styles */
+a {
+  color: rgba(var(--bs-link-color-rgb), 1);
+  color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
+  text-decoration: underline;
 }
 
-.search-input::placeholder {
-  color: #888;
+a:hover {
+  --bs-link-color-rgb: var(--bs-link-hover-color-rgb);
 }
 
-.search-input:focus {
-  outline: none;
-  border-color: #00ff00;
+/* Global button styles */
+button {
+  border-radius: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+  text-transform: none;
+  -webkit-appearance: button;
+  appearance: button;
 }
 
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+/* Global image styles */
+img {
+  vertical-align: middle;
+}

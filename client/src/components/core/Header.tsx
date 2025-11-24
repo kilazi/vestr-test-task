@@ -1,21 +1,30 @@
 import React from 'react';
+import TopBar from './TopBar';
+import Search from './Search';
+import Menu from './Menu';
+import Social from './Social';
 import './Header.css';
 
 const Header: React.FC = () => {
   return (
-    <header className="header">
-      <div className="header-content">
-        <div className="logo-section">
-          <div className="logo">VESTR</div>
-          <div className="tagline">Financial Literacy and Stock Market Investing</div>
-        </div>
-        <div className="header-right">
-          <div className="search-container">
-            <input type="text" placeholder="Search Vestr" className="search-input" />
+    <>
+      <TopBar />
+      <div className="header">
+        <div className="header-logo">
+          <div>
+            <b className="header-logo-text">VESTR</b>
+            <i className="header-logo-subtitle">Financial education and <br />simulated investing</i>
           </div>
         </div>
+
+        <div className="header-center">
+          <Search />
+          <Menu />
+        </div>
+
+        <Social />
       </div>
-    </header>
+    </>
   );
 };
 

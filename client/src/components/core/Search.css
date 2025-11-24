@@ -1,0 +1,27 @@
+.search-container {
+  border: var(--border);
+  border-radius: 100px;
+  border-top: none;
+  border-bottom: none;
+  margin-right: 1rem;
+  background-color: var(--main-color);
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  position: relative;
+  width: 100%;
+}
+
+.search-input {
+  background-color: var(--background-color);
+  border: none;
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: var(--text-color);
+  font-family: SF Pro Display Bold, sans-serif;
+  font-size: var(--font-med-s);
+  padding: 7px 15px;
+  line-height: inherit;
+  margin: 0;
+}
+

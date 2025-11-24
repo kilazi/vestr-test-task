@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Inter:100,200,300,400,500,600,700,800,900&display=swap');
+
 @font-face {
   font-family: 'SF Pro Display Medium';
   src: url('./assets/fonts/SF-Pro-Display-Medium.otf') format('opentype');
@@ -18,23 +20,88 @@
   src: url('./assets/fonts/Inter-Bold.otf') format('opentype');
 }
 
-@import url('https://fonts.googleapis.com/css?family=Inter:100,200,300,400,500,600,700,800,900&display=swap');
-
 :root {
+  --bs-breakpoint-xs: 0;
+  /* --bs-breakpoint-sm: 576px; */
+  /* --bs-breakpoint-md: 768px; */
+  --bs-breakpoint-lg: 992px;
+  --bs-breakpoint-xl: 1200px;
+  --bs-breakpoint-xxl: 1400px;
+  --font-sm-lite: 0.813rem;
+  --font-sm: 11.5px;
+  --font-med-xs: 1.2rem;
+  --font-med-s: 1.25rem;
+  --font-med-m: 1.3rem;
+  --font-med-l: 1.4rem;
+  --font-med-xl: 1.5rem;
+  --font-lg: 2rem;
+  --font-xl: 2.5rem;
+  --font-xl-s: 3rem;
+  --font-xl-m: 4rem;
+  --font-xl-l: 5rem;
+  --background-color: #f2f2f2;
+  --background-color-feed-btn: #e6e6e6;
+  --background-color-btn: #f2f2f2;
   --text-color: #000;
+  --invert-text-color: #fff;
+  --input-text-color: #868885;
+  --text-color-rgb: 0, 0, 0;
+  --text-color-input: #c6c6c6;
   --border-color: #c6c6c6;
+  --background-color-input: #ffffff0d;
   --main-color: #fff;
+  --main-green: #1dcf5b;
+  --ov-cont-color: #f0f0f0;
+  --ma-green: #28a745;
+  --ma-red: #dc3545;
+  --action-grey: #707070;
+  --nav-color-active: #1dcf5b;
+  --z-index-low: 10;
+  --z-index-med: 20;
+  --z-index-high: 30;
   --main-padding: max(3rem, calc(5% + 12rem));
   --border: 0.05rem solid var(--border-color);
+  --table-odd-row-bg: #f2f2f2;
+  --table-even-row-bg: #fff;
+  --table-hover-bg: #e0e0e0;
+  --follow-btn-color: #fff;
+  --follow-btn-plus-color: #1dcf5b;
+  --stock-filter-btn-color: #000;
+  --stock-filter-active-text: #fff;
+  --stock-change-pos: #1dcf5b;
+  --stock-change-neg: tomato;
+  --hover-color: #f0f0f0;
+  --placeholder-color: #c6c6c6;
+  --settings-bg: #f2f2f2;
   --content-width: clamp(1080px, calc(100vw - var(--main-padding) * 2), 1440px);
-  --bs-body-font-size: 1rem;
-  --bs-body-line-height: 1.5;
-  --bs-body-text-align: left;
-  --bs-body-bg: var(--main-color);
-  --bs-body-color: #fff;
-  --bs-body-font-family: 'Inter Medium', sans-serif;
-  --bs-body-font-weight: 0;
-  --bs-heading-color: var(--text-color);
+  --stock-chart-height: 35rem;
+  --background-color: #141414;
+  --background-color-feed-btn: #202020;
+  --main-color: #000;
+  --background-color-btn: #353a36;
+  --background-color-input: #ffffff0d;
+  --text-color: #fff;
+  --invert-text-color: #000;
+  --text-color-rgb: 255, 255, 255;
+  --text-color-input: #fff;
+  --border-color: #353a36;
+  --ov-cont-color: #353a36;
+  --ma-green: #0f0;
+  --ma-red: red;
+  --nav-color-active: #0f0;
+  --border: 0.05rem solid var(--border-color);
+  --table-odd-row-bg: #353a36;
+  --table-even-row-bg: #030902;
+  --table-hover-bg: #4a4a4a;
+  --follow-btn-color: #1dcf5b;
+  --follow-btn-plus-color: #fff;
+  --stock-filter-btn-color: #0f0;
+  --stock-filter-active-text: #000;
+  --stock-change-pos: #0f0;
+  --stock-change-neg: red;
+  --settings-bg: #141414;
+  --hover-color: #4a4a4a;
+  --placeholder-color: #c6c6c6;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -44,6 +111,7 @@
 }
 
 * {
+  letter-spacing: .035rem !important;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -105,4 +173,3 @@ b {
   width: 100%;
   min-height: 100vh;
 }
-

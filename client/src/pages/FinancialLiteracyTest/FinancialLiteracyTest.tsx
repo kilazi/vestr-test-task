@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import TopBar from '../../components/core/TopBar';
 import Header from '../../components/core/Header';
-import Menu from '../../components/core/Menu';
-import Social from '../../components/core/Social';
 import Status from '../../components/shared/Status';
 import Timer from '../../components/shared/Timer';
 import Button from '../../components/shared/Button';
@@ -73,15 +70,10 @@ const FinancialLiteracyTest: React.FC = () => {
 
   return (
     <div className="financial-literacy-test-page">
-      <TopBar />
       <Header />
-      <Menu />
-      <Social />
       
       <div className="test-container">
         <div className="test-content">
-          <button className="back-button">← Back</button>
-          
           <h1 className="test-title">Financial Literacy Test</h1>
           
           <div className="scoring-info">
