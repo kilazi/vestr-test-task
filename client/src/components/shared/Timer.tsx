@@ -10,6 +10,10 @@ const Timer: React.FC<TimerProps> = ({ startTime = 0, onTimeUpdate }) => {
   const [seconds, setSeconds] = useState(startTime);
 
   useEffect(() => {
+    setSeconds(startTime);
+  }, [startTime]);
+
+  useEffect(() => {
     const interval = setInterval(() => {
       setSeconds((prev) => {
         const newSeconds = prev + 1;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Header from '../../components/core/Header';
 import Status from '../../components/shared/Status';
 import Timer from '../../components/shared/Timer';
@@ -16,9 +16,24 @@ const FinancialLiteracyTest: React.FC = () => {
   const [submitting, setSubmitting] = useState(false);
   const [results, setResults] = useState<QuizCheckResponse | null>(null);
   const [testStarted, setTestStarted] = useState(false);
+  const [showFixedStatus, setShowFixedStatus] = useState(false);
+  const statusSectionRef = useRef<HTMLDivElement>(null);
+  const testStatus = "In Progress";
 
   useEffect(() => {
     fetchQuestions();
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (statusSectionRef.current) {
+        const statusSectionBottom = statusSectionRef.current.getBoundingClientRect().top;
+        setShowFixedStatus(statusSectionBottom < 0);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const fetchQuestions = async () => {
@@ -196,10 +211,21 @@ const FinancialLiteracyTest: React.FC = () => {
             </>
           ) : (
             <>
-              <div className="test-status-section">
-                <Status status="In Progress" />
+              {showFixedStatus && (
+                <div className="test-status-section-fixed">
+                  <div className="test-status-section-fixed-content">
+                    <Status status={testStatus} />
+                    <div className="timer-sticky-wrapper">
+                      <Timer startTime={timeElapsed} onTimeUpdate={undefined} />
+                    </div>
+                  </div>
+                </div>
+              )}
+              
+              <div ref={statusSectionRef} className="test-status-section">
+                <Status status={testStatus} />
                 <div className="timer-sticky-wrapper">
-                  <Timer startTime={0} onTimeUpdate={handleTimeUpdate} />
+                  <Timer startTime={timeElapsed} onTimeUpdate={handleTimeUpdate} />
                 </div>
               </div>
 
